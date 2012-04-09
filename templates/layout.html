@@ -1,0 +1,38 @@
+<!doctype html>
+<head>
+  <title>Dropshare</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        
+        <a class="brand" href="/">Dropshare</a>
+        <ul class="nav">
+          <li><a href="/upload">Upload</a></li>
+          
+          {% if not session.access_token_key %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+          {% else %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          {% endif %}
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+
+{% for message in get_flashed_messages() %}
+<div class="alert">{{ message }}</div>
+{% endfor %}
+<div class="container">
+{% block body %}{% endblock %}
+</div>
+<hr>
+<footer><p>© <a href="http://jamalkhan.com">Jamal Khan</a> 2012</p><p></p></footer>
+
+</body>
